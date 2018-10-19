@@ -147,7 +147,7 @@ def deconv2d(opts, input_, output_shape, d_h=2, d_w=2, scope=None, conv_filters_
 
 
 def log_sum_exp(logits):
-    l_max = tf.reduce_max(logits, axis=1, keepdims=True)
+    l_max = tf.reduce_max(logits, axis=1, keep_dims=True)
     return tf.add(l_max,
                   tf.reduce_sum(
                     tf.exp(tf.subtract(

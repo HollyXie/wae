@@ -131,8 +131,8 @@ class WAE(object):
         opts = self.opts
         # Adding ops to pretrain the encoder so that mean and covariance
         # of Qz will try to match those of Pz
-        mean_pz = tf.reduce_mean(self.sample_noise, axis=0, keepdims=True)
-        mean_qz = tf.reduce_mean(self.encoded, axis=0, keepdims=True)
+        mean_pz = tf.reduce_mean(self.sample_noise, axis=0, keep_dims=True)
+        mean_qz = tf.reduce_mean(self.encoded, axis=0, keep_dims=True)
         mean_loss = tf.reduce_mean(tf.square(mean_pz - mean_qz))
         cov_pz = tf.matmul(self.sample_noise - mean_pz,
                            self.sample_noise - mean_pz, transpose_a=True)
@@ -239,11 +239,11 @@ class WAE(object):
         nf = tf.cast(n, tf.float32)
         half_size = (n * n - n) / 2
 
-        norms_pz = tf.reduce_sum(tf.square(sample_pz), axis=1, keepdims=True)
+        norms_pz = tf.reduce_sum(tf.square(sample_pz), axis=1, keep_dims=True)
         dotprods_pz = tf.matmul(sample_pz, sample_pz, transpose_b=True)
         distances_pz = norms_pz + tf.transpose(norms_pz) - 2. * dotprods_pz
 
-        norms_qz = tf.reduce_sum(tf.square(sample_qz), axis=1, keepdims=True)
+        norms_qz = tf.reduce_sum(tf.square(sample_qz), axis=1, keep_dims=True)
         dotprods_qz = tf.matmul(sample_qz, sample_qz, transpose_b=True)
         distances_qz = norms_qz + tf.transpose(norms_qz) - 2. * dotprods_qz
 
