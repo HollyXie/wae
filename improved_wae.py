@@ -129,7 +129,7 @@ def improved_sampling(opts):
 
 def contrast_norm(pics):
     # pics is a [N, H, W, C] tensor
-    mean, var = tf.nn.moments(pics, axes=[1, 2, 3], keep_dims=True)
+    mean, var = tf.nn.moments(pics, axes=[1, 2, 3], keepdims=True)
     return pics / tf.sqrt(var + 1e-08)
 
 def add_aefixedpoint_cost(opts, wae_model):
@@ -230,7 +230,7 @@ def block_diagonal(matrices, dtype=tf.float32):
     return blocked
 
 def sq_distances(points):
-    sq_norms = tf.reduce_sum(tf.square(points), axis=1, keep_dims=True)
+    sq_norms = tf.reduce_sum(tf.square(points), axis=1, keepdims=True)
     dotprods = tf.matmul(points, points, transpose_b=True)
     return sq_norms, sq_norms + tf.transpose(sq_norms) - 2. * dotprods
 
